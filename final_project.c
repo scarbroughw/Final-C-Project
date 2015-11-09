@@ -1,26 +1,12 @@
 #include <stdio.h>
 main()
 {
-      int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter;
+      int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,max;
       printf("How many weeks total? (up to 10)  ");
       scanf("%i", &weeks);
-      /*int *team0 = malloc(sizeof(int) * weeks);
-      int *team1 = malloc(sizeof(int) * weeks);
-      int *team2 = malloc(sizeof(int) * weeks);
-      int *team3 = malloc(sizeof(int) * weeks);
-      int *team4 = malloc(sizeof(int) * weeks);
-      int *team5 = malloc(sizeof(int) * weeks);*/
-      
-      
-      /*int team0[] = {0,0,0};
-      int team1[] = {0,0,0};
-      int team2[] = {0,0,0};  //Experimental Programming -- need to see if I can change array index data
-      int team3[] = {0,0,0};		//each array = {win,tied,loss} -- each win,tie,or loss will add 1 to that array index
-      int team4[] = {0,0,0};
-      int team5[] = {0,0,0};
-      int teams[] = {team1,team2,team3,team4,team5,team6};*/ //if I have an array of arrays (if possible?) how do I access the
-      													   // inside array's index
-      													   
+      int points_ordered[]={0,0,0,0,0,0};
+      int points[]={0,0,0,0,0,0};
+      												   
       int team_win[]={0,0,0,0,0,0};
 	  int team_tied[]={0,0,0,0,0,0};
 	  int team_loss[]={0,0,0,0,0,0};													   
@@ -66,11 +52,40 @@ main()
 					 
 					
                }
-               printf("\n----------------------------------------\n\nLeague Standings after %i weeks\n\n",weeks);
-					 printf("\t         W  T  L\n");
-					 for(j=0;j<6;j++){
-					 	printf("\tTeam %i:  %i  %i  %i\n",j,team_win[j],team_tied[j],team_loss[j]);
-					 }
+               
+               //Points
+                for(j=0;j<6;j++){
+            		points[j]= (team_win[j]+2) + (team_tied[j]+1);
+			    }
+               
+                printf("\n----------------------------------------\n\nLeague Standings after %i weeks\n\n",weeks);
+				printf("\t         W  T  L\n");
+				for(j=0;j<6;j++){
+					printf("\tTeam %i:  %i  %i  %i\n",j,team_win[j],team_tied[j],team_loss[j]);
+				}
+				
+				//Orders the Point list from greatest to least
+				printf("\n----------------------------------------\n\nPoints Table:\n\n");
+                max = points[0];
+				for(i=0;i<6;i++){    //***PROBLEM*** printing all Team 0
+               	
+               	
+			   		for(j=1;j<5;j++){
+						if(points[j]>max){
+							max = points[j];
+							points_ordered[i]=j;
+							
+						}
+						else
+							points_ordered[i] = 0;
+			   		}
+			   		printf("\tTeam %i:  %i\n",points_ordered[j],points[j]);
+           		}
+					 
+				
+				for(j=0;j<6;j++){
+									}
+					 
 		}
       getch();      
       
