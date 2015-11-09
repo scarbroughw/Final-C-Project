@@ -74,12 +74,16 @@ main()
 						if(points[j]>max){
 							max = points[j];
 							points_ordered[i]=j;
-							
+							printf("\tTeam %i:  %i\n",points_ordered[j],points[j]);
+							points[j]=-1;
 						}
-						else
-							points_ordered[i] = 0;
+						else{
+							points_ordered[i]=0;
+							points[0]=-1;
+						}
+							
 			   		}
-			   		printf("\tTeam %i:  %i\n",points_ordered[j],points[j]);
+			   		
            		}
 					 
 				
