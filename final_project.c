@@ -2,8 +2,10 @@
 main()
 {
       int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,a,hold; 
+      int games_played[]={0,0,0,0,0,0};
 	  int team_index[]={0,1,2,3,4,5};
 	  int team_order[]={0,0,0,0,0,0};
+	  double win_percentage[]={0,0,0,0,0,0};
       printf("How many weeks total? (up to 10)  ");
       scanf("%i", &weeks);
       int team_number[]={0,0,0,0,0,0};
@@ -39,6 +41,8 @@ main()
                      	scanf("%i",&score1);
                      	printf("Enter team %i's score: ",num2);
                      	scanf("%i",&score2);
+                     	games_played[num1]+=1;
+                     	games_played[num2]+=1;
                      	if(score1<score2){
 						 	team_win[num2]+=1;
 							team_loss[num1]+=1;
@@ -68,6 +72,21 @@ main()
 				printf("\t         W  T  L\n");
 				for(j=0;j<6;j++){
 					printf("\tTeam %i:  %i  %i  %i\n",j,team_win[j],team_tied[j],team_loss[j]);
+				}
+				
+				
+				
+				//Calculating winning percentage for each team
+				
+					//Adding up number of games played
+				/*for(i=0;i<6;i++){
+					games_played[i]=team_win[i]+team_tied[i]+team_loss[i];
+				}*/
+				
+				for(i=0;i<6;i++){
+					win_percentage[i]=(float)team_win[i]/(float)games_played[i];
+					printf("Team %i winning percentage: %.2f\n",i,win_percentage[i]);
+					
 				}
 				
 				//Orders the Point list from greatest to least
