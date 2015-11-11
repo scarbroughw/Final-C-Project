@@ -3,6 +3,7 @@ main()
 {
       int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,a,hold; 
       int games_played[]={0,0,0,0,0,0};
+      int total_points[]={0,0,0,0,0,0};
 	  int team_index[]={0,1,2,3,4,5};
 	  int team_order[]={0,0,0,0,0,0};
 	  double win_percentage[]={0,0,0,0,0,0};
@@ -43,6 +44,8 @@ main()
                      	scanf("%i",&score2);
                      	games_played[num1]+=1;
                      	games_played[num2]+=1;
+                     	total_points[num1]+=score1;
+                     	total_points[num2]+=score2;
                      	if(score1<score2){
 						 	team_win[num2]+=1;
 							team_loss[num1]+=1;
@@ -87,6 +90,11 @@ main()
 					win_percentage[i]=(float)team_win[i]/(float)games_played[i];
 					printf("Team %i winning percentage: %.2f\n",i,win_percentage[i]);
 					
+				}
+				printf("\n----------------------------------------\nTotal Points:\n");
+				//'Modify to compute and print for each team the total points scored for and against'
+				for(i=0;i<6;i++){
+					printf("Team %i: %i\n",i,total_points[i]);
 				}
 				
 				//Orders the Point list from greatest to least
