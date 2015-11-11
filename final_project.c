@@ -104,6 +104,24 @@ main()
 					printf("Team %i: %i\n",i,points_against[i]);
 				}
 				
+				printf("\n\n----------------------------------------\n");
+				
+				//Outputs probability
+				printf("Winning prediction for two teams:\n");
+				int probability1,probability2;
+				printf("Input the first team number: ");
+				scanf("%i",&probability1);
+				printf("Input the second team number: ");
+				scanf("%i",&probability2);
+				if(win_percentage[probability1]<win_percentage[probability2])
+					printf("Winning prediction is Team %i",probability2);
+					
+				else if(win_percentage[probability2]<win_percentage[probability1])
+					printf("Winning prediction is Team %i",probability1);
+					
+				else
+					printf("Winning prediction outcome is even between both teams");
+				
 				//Orders the Point list from greatest to least
 				
 				//Works half way!! Can only get the scores to print in descending order
