@@ -1,9 +1,12 @@
 #include <stdio.h>
 main()
 {
-      int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,max;
+      int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,a,hold; 
+	  int team_index[]={0,1,2,3,4,5};
+	  int team_order[]={0,0,0,0,0,0};
       printf("How many weeks total? (up to 10)  ");
       scanf("%i", &weeks);
+      int team_number[]={0,0,0,0,0,0};
       int points_ordered[]={0,0,0,0,0,0};
       int points[]={0,0,0,0,0,0};
       												   
@@ -52,10 +55,13 @@ main()
 					 
 					
                }
+               for(i=0;i<6;i++){
+            		team_index[i]=points[i];
+			   }
                
                //Points
                 for(j=0;j<6;j++){
-            		points[j]= (team_win[j]+2) + (team_tied[j]+1);
+            		points[j]= (team_win[j]*2) + (team_tied[j]*1);
 			    }
                
                 printf("\n----------------------------------------\n\nLeague Standings after %i weeks\n\n",weeks);
@@ -65,30 +71,35 @@ main()
 				}
 				
 				//Orders the Point list from greatest to least
-				printf("\n----------------------------------------\n\nPoints Table:\n\n");
-                max = points[0];
-				for(i=0;i<6;i++){    //***PROBLEM*** printing all Team 0
-               	
-               	
-			   		for(j=1;j<5;j++){
-						if(points[j]>max){
-							max = points[j];
-							points_ordered[i]=j;
-							printf("\tTeam %i:  %i\n",points_ordered[j],points[j]);
-							points[j]=-1;
-						}
-						else{
-							points_ordered[i]=0;
-							points[0]=-1;
-						}
-							
-			   		}
-			   		
-           		}
-					 
 				
-				for(j=0;j<6;j++){
-									}
+				//Works half way!! Can only get the scores to print in descending order
+				
+				/*printf("\n----------------------------------------\n\nPoints Table:\n\n");
+                
+			    for (i = 0; i < 6; ++i)
+			    {
+			        for (j = i + 1; j < 6; ++j)
+			        {
+			        	
+			            if (points[i] < points[j])
+			            {
+			            	a = points[i];
+			                points[i] = points[j];
+			                points[j] = a;
+			            }
+			            else{
+						
+			            	team_order[j]=i;
+			            	
+			            }
+			        }
+			    }
+			    
+			    for (i = 0; i < 6; ++i)
+			    {		    	
+			        printf("%i\n",points[i]);
+			    }*/
+			    
 					 
 		}
       getch();      
