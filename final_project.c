@@ -109,7 +109,7 @@ main()
 				//Next block of code calls a test for a new prediction algorithm function written below
 				int prediction = getPrediction(team_win, team_tied, team_loss,win_percentage);	 
 		}
-      getch();      
+            
 }
 
 //Probability algorithm sets the home team with an at-home advatage of 10%
