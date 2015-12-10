@@ -1,27 +1,3 @@
-/*
-
-   .-.     .-.     .-.     .-.     .-.     .-.     .-.     .-.     .-. 
- .'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `.
-(    .     .-.     .-.     .-.     .-.     .-.     .-.     .-.     .    )
- `.   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   .'
-   )    )                                                       (    (
- ,'   ,'                                                         `.   `.
-(    (                                                             )    )
- `.   `.                                                         .'   .' 
-   )    )                   Coding By:                           (    (
- ,'   ,'                         Bill Scarbrough                   `.   `.
-(    (                                                             )    )
- `.   `.                                                         .'   .' 
-   )    )                                                       (    (
- ,'   ,'                                                         `.   `.
-(    (                                                             )    )
- `.   `.                                                         .'   .' 
-   )    )       _       _       _       _       _       _       (    (
- ,'   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   `.
-(    '  _  `-'  _  `-'  _  `-'  _  `-'  _  `-'  _  `-'  _  `-'  _  `    )
- `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .'
-   `-'     `-'     `-'     `-'     `-'     `-'     `-'     `-'     `-'
-*/
 #include <stdio.h>
 #include <stdbool.h>
 int getPrediction(int win[], int tied[], int loss[],double win_percentage[]);
@@ -194,7 +170,10 @@ main()
 int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
 {
 	int home,away,home_advantage;
-	printf("Input the home team's number: ");
+	char answer;
+    _Bool again = true;
+	while(again = true){
+	printf("\n\nInput the home team's number: ");
 	scanf("%i",&home);
 	printf("Input the away team's number: ");
 	scanf("%i",&away);
@@ -211,16 +190,24 @@ int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
 	else
 		printf("Winning prediction outcome is even between both teams");
 		
+		printf("\n\nWould you like to run the prediction algorithm again? (y for yes, n for no) ");
+	    scanf(" %c", &answer);
+	    if(answer == 'y')
+	              again = true;
+	              
+        else if(answer == 'n'){
 		
-		return;
-	
+			again = false;
+        	break;
+        }
+}
 }
 int getOrder(int points[], int team_order[])
 {
-    int i,j,a,b=0,answer;
-    bool again = true;
+    int i,j,a,b=0;
+    
     int teamNumber[6];
-    for(again == true){
+    
      for (i = 0; i < 6; ++i)
 	    {
 	        for (j = i + 1; j < 6; ++j)
@@ -241,21 +228,15 @@ int getOrder(int points[], int team_order[])
 	            b++;
 	        }
 	    }
-	    
-	    printf("\nWould you like to run the prediction algorithm again? (y for yes, n for no)");
-	    scanf("%b",&answer);
-	    if(answer == y)
-	              again == true;
-	              
-        else if(answer == n)
-             again == false;
-     }
-	    
 	    for (i = 0; i < 6; ++i)
 	    {		    	
 	        printf("Team %i: %i\n",teamNumber[i],points[i]);
 	    }
-	    return;
+	    
+     
+	    
+	    
+	    
 }
 
 /*
