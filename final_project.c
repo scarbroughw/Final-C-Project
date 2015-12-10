@@ -1,4 +1,31 @@
+/*
+
+   .-.     .-.     .-.     .-.     .-.     .-.     .-.     .-.     .-. 
+ .'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `.
+(    .     .-.     .-.     .-.     .-.     .-.     .-.     .-.     .    )
+ `.   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   .'
+   )    )                                                       (    (
+ ,'   ,'                                                         `.   `.
+(    (                                                             )    )
+ `.   `.                                                         .'   .' 
+   )    )                   Coding By:                           (    (
+ ,'   ,'                         Bill Scarbrough                   `.   `.
+(    (                                                             )    )
+ `.   `.                                                         .'   .' 
+   )    )                                                       (    (
+ ,'   ,'                                                         `.   `.
+(    (                                                             )    )
+ `.   `.                                                         .'   .' 
+   )    )       _       _       _       _       _       _       (    (
+ ,'   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   `.
+(    '  _  `-'  _  `-'  _  `-'  _  `-'  _  `-'  _  `-'  _  `-'  _  `    )
+ `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .' `.   .'
+   `-'     `-'     `-'     `-'     `-'     `-'     `-'     `-'     `-'
+*/
 #include <stdio.h>
+#include <stdbool.h>
+int getPrediction(int win[], int tied[], int loss[],double win_percentage[]);
+int getOrder(int newOrder[],int team_order[]);
 main()
 {
       int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,a,hold; 
@@ -17,7 +44,8 @@ main()
       int team_win[]={0,0,0,0,0,0};
 	  int team_tied[]={0,0,0,0,0,0};
 	  int team_loss[]={0,0,0,0,0,0};													   
-      
+    
+	  // Note: That if is equal to else then pi is equal to life
       
       if(weeks > 10)
                printf("Error: Only up to 10 weeks can be entered.");
@@ -43,6 +71,20 @@ main()
                      	scanf("%i",&score1);
                      	printf("Enter team %i's score: ",num2);
                      	scanf("%i",&score2);
+                     	/*
+																																			                     	                      ___..............._
+																																			             __.. ' _'.""""""\\""""""""- .`-._
+																																			 ______.-'         (_) |      \\           ` \\`-. _
+																																			/_       --------------'-------\\---....______\\__`.`  -..___
+																																			| T      _.----._           Xxx|x...           |          _.._`--. _
+																																			| |    .' ..--.. `.         XXX|XXXXXXXXXxx==  |       .'.---..`.     -._
+																																			\_j   /  /  __  \  \        XXX|XXXXXXXXXXX==  |      / /  __  \ \        `-.
+																																			 _|  |  |  /  \  |  |       XXX|""'            |     / |  /  \  | |          |
+																																			|__\_j  |  \__/  |  L__________|_______________|_____j |  \__/  | L__________J
+																																			     `'\ \      / ./__________________________________\ \      / /___________\
+																																			        `.`----'.'                                     `.`----'.'
+																																			          `""""'                                         `""""' 
+                     	*/
                      	games_played[num1]+=1;
                      	games_played[num2]+=1;
                      	total_points[num1]+=score1;
@@ -82,8 +124,15 @@ main()
 				
 				
 				
-				//Calculating winning percentage for each team
-				
+			//  ____    ____     //Calculating winning percentage for each team    ____    ____
+			  /*\   \  /   /_______________________________________________________\   \  /   /
+				 \   \/   ///¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\\\   \/   /
+				  \      ///             Alberto Pacheco is the BEST an            \\\      /
+				  /      \\\                      Introduction                      |||    |
+				 /   /\   \\\_______________________________________________________|||    |
+				/   /  \   \¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|    |
+				¯¯¯¯    ¯¯¯¯                                                           ¯¯¯¯
+				*/
 					//Adding up number of games played
 				/*for(i=0;i<6;i++){
 					games_played[i]=team_win[i]+team_tied[i]+team_loss[i];
@@ -105,8 +154,124 @@ main()
 				}
 				
 				printf("\n\n----------------------------------------\n");
+				int newOrder[6];
+				for(i=0;i<6;i++){
+                    newOrder[i] = points[i];
+                    }
+				int order = getOrder(newOrder,team_order);
 				
-				//Outputs probability
+				//Next block of code calls a test for a new prediction algorithm function written below
+				int prediction = getPrediction(team_win, team_tied, team_loss,win_percentage);
+				
+				
+				//Orders the Point list from greatest to least
+				/* BAT MAN Duty Calls, BRB
+												  
+			                      _..-'(                       )`-.._
+			                   ./'. '||\\.       (\_/)       .//||` .`\.
+			                ./'.|'.'||||\\|..    )   (    ..|//||||`.`|.`\.
+			             ./'..|'.|| |||||\`````` '   ` ''''''/||||| ||.`|..`\.
+			           ./'.||'.|||| ||||||||||||.     .|||||||||||| |||||.`||.`\.
+			          /'|||'.|||||| ||||||||||||{     }|||||||||||| ||||||.`|||`\
+			         '.|||'.||||||| ||||||||||||{     }|||||||||||| |||||||.`|||.`
+			        '.||| ||||||||| |/'   ``\||``     ''||/''   `\| ||||||||| |||.`
+			        |/' \./'     `\./         \!|\   /|!/         \./'     `\./ `\|
+			        V    V         V          }' `\ /' `{          V         V    V
+			        `    `         `               V               '         '    '
+				*/
+				//Works half way!! Can only get the scores to print in descending order
+				
+				/*printf("\n----------------------------------------\n\nPoints Table:\n\n");
+                
+			    */		 
+		}
+      getch();      
+}
+
+//Probability algorithm sets the home team with an at-home advatage of 10%
+//Study represented in an article by SBNation.com showed that the NBA had an average at-home advantage of 10%
+
+int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
+{
+	int home,away,home_advantage;
+	printf("Input the home team's number: ");
+	scanf("%i",&home);
+	printf("Input the away team's number: ");
+	scanf("%i",&away);
+	home_advantage = home *1.1;
+	if(win_percentage[home]<win_percentage[away])
+		printf("Winning prediction is Team %i",away);
+	
+		
+	else if(win_percentage[away]<win_percentage[home])
+	{
+		printf("Winning prediction is Team %i",home_advantage);
+	}
+		
+	else
+		printf("Winning prediction outcome is even between both teams");
+		
+		
+		return;
+	
+}
+int getOrder(int points[], int team_order[])
+{
+    int i,j,a,b=0,answer;
+    bool again = true;
+    int teamNumber[6];
+    for(again == true){
+     for (i = 0; i < 6; ++i)
+	    {
+	        for (j = i + 1; j < 6; ++j)
+	        { 
+	        	
+	            if (points[i] < points[j])
+	            {
+                    a = points[i];
+	                points[i] = points[j];
+	                points[j] = a;
+	                
+	                
+	            }
+	            else{
+	            	team_order[j]=i;
+	            }
+	            teamNumber[b] = i;
+	            b++;
+	        }
+	    }
+	    
+	    printf("\nWould you like to run the prediction algorithm again? (y for yes, n for no)");
+	    scanf("%b",&answer);
+	    if(answer == y)
+	              again == true;
+	              
+        else if(answer == n)
+             again == false;
+     }
+	    
+	    for (i = 0; i < 6; ++i)
+	    {		    	
+	        printf("Team %i: %i\n",teamNumber[i],points[i]);
+	    }
+	    return;
+}
+
+/*
+--------------------------------------------------------------------------------------------------------------------------------------
+     o   \ o /  _ o         __|    \ /     |__        o _  \ o /   o
+    /|\    |     /\   __\o    \o    |    o/    o/__   /\     |    /|\      DONE!!
+    / \   / \   | \  /)  |    ( \  /o\  / )    |  (\  / |   / \   / \
+--------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+
+
+
+
+//Outputs probability
+				/*
 				printf("Winning prediction for two teams:\n");
 				int probability1,probability2;
 				printf("Input the first team number: ");
@@ -121,39 +286,4 @@ main()
 					
 				else
 					printf("Winning prediction outcome is even between both teams");
-				
-				//Orders the Point list from greatest to least
-				
-				//Works half way!! Can only get the scores to print in descending order
-				
-				/*printf("\n----------------------------------------\n\nPoints Table:\n\n");
-                
-			    for (i = 0; i < 6; ++i)
-			    {
-			        for (j = i + 1; j < 6; ++j)
-			        {
-			        	
-			            if (points[i] < points[j])
-			            {
-			            	a = points[i];
-			                points[i] = points[j];
-			                points[j] = a;
-			            }
-			            else{
-						
-			            	team_order[j]=i;
-			            	
-			            }
-			        }
-			    }
-			    
-			    for (i = 0; i < 6; ++i)
-			    {		    	
-			        printf("%i\n",points[i]);
-			    }*/
-			    
-					 
-		}
-      getch();      
-      
-}
+				*/
