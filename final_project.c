@@ -34,6 +34,7 @@ main()
                      }
                      for(j=0;j<3;j++){				//runs for each game
                      	week_counter= j+1;
+                      	printf("\n---Week %i Game %i---\n", w, week_counter);
                      	printf("Enter the two teams and their scores: ");
                      	scanf("%i%i%i%i",&num1,&num2,&score1,&score2);
                      	games_played[num1]+=1;
