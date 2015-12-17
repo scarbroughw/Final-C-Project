@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-int getPrediction(int win[], int tied[], int loss[],double win_percentage[]);
+float getPrediction(int total_points[]);
 int getOrder(int newOrder[]);
 main()
 {
@@ -38,15 +38,9 @@ main()
                      }
                      for(j=0;j<3;j++){				//runs for each game
                      	week_counter= j+1;
-                     	printf("\n---Week %i Game %i---\n", w, week_counter);
-                     	printf("Enter the first team's number: ");
-                     	scanf("%i",&num1);
-                     	printf("Enter the second team's number: ");
-                     	scanf("%i",&num2);
-                     	printf("Enter team %i's score: ",num1);
-                     	scanf("%i",&score1);
-                     	printf("Enter team %i's score: ",num2);
-                     	scanf("%i",&score2);
+                     	printf("Enter the two teams and their scores: ");
+                     	scanf("%i%i%i%i",&num1,&num2,&score1,&score2);
+                     	
                      	games_played[num1]+=1;
                      	games_played[num2]+=1;
                      	total_points[num1]+=score1;
@@ -107,15 +101,16 @@ main()
 			
 				int order = getOrder(newOrder);
 				//Next block of code calls a test for a new prediction algorithm function written below
-				int prediction = getPrediction(team_win, team_tied, team_loss,win_percentage);	 
+				int prediction = getPrediction(total_points);	 
 		}
         getch();    
 }
 
 //Probability algorithm sets the home team with an at-home advatage of 10%
+//Algorithm takes the total points scored for and compares the two teams by it
 //Study represented in an article by SBNation.com showed that the NBA had an average at-home advantage of 10%
 //Asks user to repeat prediction algorithm
-int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
+float getPrediction(int total_points[])
 {
 	int home,away;
     float home_advantage;
@@ -127,14 +122,14 @@ int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
 		scanf("%i",&home);
 		printf("Input the away team's number: ");
 		scanf("%i",&away);
-		home_advantage = home *1.1;
-		if(win_percentage[home]<win_percentage[away])
+		home_advantage = total_points[home]*1.1;
+		if(home_advantage<total_points[away])
 			printf("Winning prediction is Team %i",away);
 		
 			
-		else if(win_percentage[away]<win_percentage[home])
+		else if(total_points[away]<home_advantage)
 		{
-			printf("Winning prediction is Team %i",home_advantage);
+			printf("Winning prediction is Team %i",home);
 		}
 			
 		else
