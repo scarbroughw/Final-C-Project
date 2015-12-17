@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 int getPrediction(int win[], int tied[], int loss[],double win_percentage[]);
-int getOrder(int newOrder[],int team_order[]);
+int getOrder(int newOrder[]);
 main()
 {
       int weeks,i,c,j,w=0,g=0,t1,t2,num1,num2,team_index1,team_index2,score1,score2,week_counter,a,hold; 
@@ -104,12 +104,12 @@ main()
 				for(i=0;i<6;i++){
                     newOrder[i] = points[i];
                     }
-				int order = getOrder(newOrder,team_order);
-				
+			
+				int order = getOrder(newOrder);
 				//Next block of code calls a test for a new prediction algorithm function written below
 				int prediction = getPrediction(team_win, team_tied, team_loss,win_percentage);	 
 		}
-            
+        getch();    
 }
 
 //Probability algorithm sets the home team with an at-home advatage of 10%
@@ -117,7 +117,8 @@ main()
 //Asks user to repeat prediction algorithm
 int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
 {
-	int home,away,home_advantage;
+	int home,away;
+    float home_advantage;
 	char answer;
     _Bool again = true;
 	while(again = true)
@@ -152,12 +153,12 @@ int getPrediction(int win[], int tie[], int loss[], double win_percentage[])
 	}
 }
 //This method orders the teams' scores by descending order
-int getOrder(int points[], int team_order[])
+int getOrder(int points[])
 {
-    int i,j,a,b=0;
+    int i,j,a,b;
     
-    int teamNumber[6];
-    
+    int teamNumber[]={0,1,2,3,4,5};
+    printf("Points Table:\n");
      for (i = 0; i < 6; ++i)
 	    {
 	        for (j = i + 1; j < 6; ++j)
@@ -165,17 +166,14 @@ int getOrder(int points[], int team_order[])
 	        	
 	            if (points[i] < points[j])
 	            {
+                    b = teamNumber[i];
+                    teamNumber[i]= teamNumber[j];
+                    teamNumber[j]=b;
                     a = points[i];
 	                points[i] = points[j];
 	                points[j] = a;
-	                
-	                
 	            }
-	            else{
-	            	team_order[j]=i;
-	            }
-	            teamNumber[b] = i;
-	            b++;
+	            
 	        }
 	    }
 	    for (i = 0; i < 6; ++i)
@@ -183,4 +181,5 @@ int getOrder(int points[], int team_order[])
 	        printf("Team %i: %i\n",teamNumber[i],points[i]);
 	    }	    
 }
+
 
