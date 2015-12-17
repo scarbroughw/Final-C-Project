@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-float getPrediction(int total_points[]);
+float getPrediction(int total_points[],int games_played[]);
 int getOrder(int newOrder[]);
 main()
 {
@@ -101,7 +101,7 @@ main()
 			
 				int order = getOrder(newOrder);
 				//Next block of code calls a test for a new prediction algorithm function written below
-				int prediction = getPrediction(total_points);	 
+				int prediction = getPrediction(total_points,games_played);	 
 		}
         getch();    
 }
@@ -110,7 +110,7 @@ main()
 //Algorithm takes the total points scored for and compares the two teams by it
 //Study represented in an article by SBNation.com showed that the NBA had an average at-home advantage of 10%
 //Asks user to repeat prediction algorithm
-float getPrediction(int total_points[])
+float getPrediction(int total_points[],int games_played[])
 {
 	int home,away;
     float home_advantage;
@@ -122,12 +122,15 @@ float getPrediction(int total_points[])
 		scanf("%i",&home);
 		printf("Input the away team's number: ");
 		scanf("%i",&away);
-		home_advantage = total_points[home]*1.1;
-		if(home_advantage<total_points[away])
+		
+		float home_avg = (float)total_points[home]/(float)games_played[home];
+		float away_avg = (float)total_points[away]/(float)games_played[away];
+		home_avg = home_avg*1.1;
+		if(home_avg<away_avg)
 			printf("Winning prediction is Team %i",away);
 		
 			
-		else if(total_points[away]<home_advantage)
+		else if(away_avg<home_avg)
 		{
 			printf("Winning prediction is Team %i",home);
 		}
